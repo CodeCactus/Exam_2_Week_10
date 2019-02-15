@@ -80,7 +80,7 @@ def test_draw_a_picture():
 #   The is_prime function is supplied.  Do NOT change is_prime
 #     """
 ###############################################################################
-# TODO: 1  READ the doc-string for the is_prime function defined below.
+# DONE: 1  READ the doc-string for the is_prime function defined below.
 # You do NOT need to understand its implementations,
 # just its specification (per the doc-string).
 # You should  ** CALL **  functions as needed in implementing the
@@ -111,7 +111,7 @@ def is_prime(n):
     return True
 
 # -------------------------------------------------------------------------
-#  TODO: 2. Implement and test the draw_a_picture function.
+#  DONE: 2. Implement and test the draw_a_picture function.
 #           Tests have been written for you (above in main).
 #  We suggest breaking this into multiple commits.
 #     Can you show the correct circle?
@@ -129,7 +129,44 @@ def is_prime(n):
 #
 def draw_a_picture(point, n, color, window):
 
-    pass
+
+
+    c=rg.Circle(point,100)
+    c.attach_to(window)
+    window.render(0.5)
+    c1=rg.Point(point.x-80,point.y-40) #bottom left
+    c2=rg.Point(point.x+80,point.y+40) #top right
+    r=rg.Rectangle(c1,c2)
+    r.attach_to(window)
+    width=c2.x-c1.x
+    a=1
+    for k in range(0,n):
+        top = rg.Point(r.get_upper_left_corner().x+(k*(width/(n-1))),r.get_upper_left_corner().y)
+        line = rg.Line(point,top)
+
+        if a == 1:
+            line.color=color
+        elif is_prime(a) is False:
+            line.color=color
+        else:
+            line.color = 'orange'
+        line.attach_to(window)
+        window.render()
+        a=a+1
+
+
+
+
+#
+#       -- There is a 0.5 second pause after each rg.Circle is drawn.
+#       Must  ** NOT close **   the window.
+#
+#     Type hints:
+#       :type circle: rg.Circle
+#       :type n: int
+#       :type window: rg.RoseWindow
+#   The is_prime function is supplied.  Do NOT change is_prime
+#     """
 
 
 main()
